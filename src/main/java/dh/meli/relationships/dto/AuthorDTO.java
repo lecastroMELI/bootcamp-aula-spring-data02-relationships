@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
+@NoArgsConstructor // IMPORTANTE ELE SEMPRE SER DECLADO, PORQUE O JPA PRECISA DELE A PRINCÍPIO
 public class AuthorDTO {
-    // ATRIBUTOS QUE DEVERÃO SER RETORNADOS
-    private String name;
-    private AddressDTO addressDTO;
+    // ATRIBUTOS QUE DEVERÃO SER RETORNADOS NO JSON DA REQUISIÇÃO
+    private String name; // name É O NOME QUE APARECE NO JSON
+    private AddressDTO addressDTO; // addressDTO É O NOME QUE APARECE NO JSON
 
     // É AQUI QUE ACONTECE A TRANSFORMAÇÃO
     // CONSTRUTOR RECEBE COMO PARÂMETRO UM AUTOR (id, name, address)

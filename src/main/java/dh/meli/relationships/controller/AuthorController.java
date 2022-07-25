@@ -22,8 +22,18 @@ public class AuthorController {
         return ResponseEntity.ok(repository.findById(id).get());
     }
 
-    @GetMapping("dto/{id}")
+    @GetMapping("/dto/{id}")
     public ResponseEntity<AuthorDTO> getDtoById(@PathVariable long id) {
         return ResponseEntity.ok(repository.getById(id));
+    }
+
+    @GetMapping("/native/{id}")
+    public ResponseEntity<Author> getNativeById(@PathVariable long id) {
+        return ResponseEntity.ok(repository.getNativeById(id));
+    }
+
+    @GetMapping("/eagle/{id}")
+    public ResponseEntity<AuthorDTO> getDtoEagleById(@PathVariable long id) {
+        return ResponseEntity.ok(repository.getDtoEagle(id));
     }
 }
