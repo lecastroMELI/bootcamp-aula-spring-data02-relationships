@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 /* TUDO O QUE FOR MODELADO AQUI, OU SEJA, DENTRO DE UMA CLASSE MODEL, SERÁ PERSISTIDO NO BANCO DE DADOS.
 * NUMA CLASSE DTO OU DAO PODEM SER DEFINIDOS OS ATRIBUTOS QUE NÃO DEVEM CONSTAR NO BANCO
 *
@@ -23,6 +25,7 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
+    // ----- ENDEREÇO (ADDRESS) ------- //
     /* CARDINALIDADE BI-DIRECIONAL, POIS TEM ESSA CARDINALIDADE EM AMBAS AS CLASSES (Author e Address)
     * PORTANTO, DADO UM AUTOR EU OBTENHO O ENDEREÇO E VICE-VERSA.
     *
@@ -43,4 +46,15 @@ public class Author {
     @OneToOne(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("author") // IGNORA OS DADOS DO AUTOR (AO PREENCHER O ADDRESS NÃO TRAGA OS DADOS DO AUTHOR)
     private Address address; // CAMPO QUE REFERENCIA O OBJETO. NOME DO CAMPO: address
+
+    // ----- LIVRO (BOOK) ------- //
+    // N:M - AUTOR TEM 1 OU N LIVROS E VICE-VERSA
+    @ManyToMany
+    @JoinTable(
+        name = "book_author", // nome da tabela de junção
+        joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"), // atributo do 'author' na tabela de ligação
+        inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id") // atributo do 'book' na tabela de ligação
+    ) // TABELA DE JUNÇÃO/LIGAÇÃO
+    @JsonIgnoreProperties("authors") // QUANDO CARREGAR O LIVRO, IGNORAR O AUTOR
+    private List<Book> books; // CAMPO QUE REFERENCIA O OBJETO. NOME DO CAMPO: books
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity // PERSISITR OS DADOS NO BANCO
 @Getter @Setter
@@ -24,4 +25,11 @@ public class Book {
     @JoinColumn(name = "id_subject") // CHAVE ESTRANGEIRA (FK)
     @JsonIgnoreProperties("books") // ignorar a lista de livros do subject, quando pesquisar pelo livro
     private Subject subject;
+
+    // ----- AUTOR (AUTHOR) ------- //
+    // OBJETIVO: A PARTIR DA CONSULTA PELO LIVRO CONSEGUIR LISTAR TODOS OS AUTORES DO LIVRO CONSULTADO
+    // N:M
+    @ManyToMany(mappedBy = "books") // mappedBy = UTILIZADO PARA INDICAR QUAL É A TABELA QUE É PROPRIETÁRIA DO RELACIONAMENTO.
+    @JsonIgnoreProperties("books")
+    private List<Author> authors;
 }
