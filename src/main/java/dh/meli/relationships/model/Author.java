@@ -34,8 +34,13 @@ public class Author {
     * Em nosso exemplo, deixando essa opção, serão feitas duas consultas ao banco de dados,
     * sem essa opção, já é feito o join direto. Usar essa opção com cautela.
     *
+    * 🔘 cascade = CascadeType.PERSIST = AO FAZER A PESISTENCIA DO AUTOR, QUERO SALVAR ESSE RELACIONAMENTO TAMBÉM
+    * PERSIST é para insert
+    * REMOVE para o delete (apaga tudo em cascata)
+    * ALL é para qualquer operação que for em cascata.
+    *
     * 1:1 - 1 AUTOR PARA 1 ENDEREÇO */
-    @OneToOne(mappedBy = "author", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("author") // IGNORA OS DADOS DO AUTOR (AO PREENCHER O ADDRESS NÃO TRAGA OS DADOS DO AUTHOR)
     private Address address; // CAMPO QUE REFERENCIA O OBJETO. NOME DO CAMPO: address
 }
