@@ -17,7 +17,10 @@ public class Subject {
     @Column(length = 30, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "subject") // 1:N um assunto vários livros
-    @JsonIgnoreProperties("subject") // Dentro do livro não trazer o assunto, partindo do pressutos que a pesquisa será feita a partir do livro
+    // ------- LIVRO (BOOK) -------- //
+    // O MESMO LIVRO PODE TER '1' ASSUNTO (e um assunto pode ter 'N' livros)
+    // 1:N
+    @OneToMany(mappedBy = "subject") // TABELA PROPRIETÁRIA DO RELACIONAMENTO: subject
+    @JsonIgnoreProperties("subject") // AO PESQUISAR PELO LIVRO: 'dentro do livro não trazer o assunto'
     private List<Book> books;
 }

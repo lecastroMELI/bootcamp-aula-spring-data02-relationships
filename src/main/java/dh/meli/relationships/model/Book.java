@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
+@Entity // PERSISITR OS DADOS NO BANCO
 @Getter @Setter
 public class Book {
 
@@ -17,9 +17,11 @@ public class Book {
     @Column(length = 50, nullable = false)
     private String title;
 
-    // N LIVRO = 1 ASSUNTO
-    @ManyToOne // um assunto está em vários livros
-    @JoinColumn(name = "id_subject")
+    // ----- ASSUNTO (SUBJECT) ------- //
+    // O MESMO ASSUNTO PODE TER 'N' LIVROS (e o livro só pode ter '1' assunto)
+    // N:1
+    @ManyToOne
+    @JoinColumn(name = "id_subject") // CHAVE ESTRANGEIRA (FK)
     @JsonIgnoreProperties("books") // ignorar a lista de livros do subject, quando pesquisar pelo livro
     private Subject subject;
 }
