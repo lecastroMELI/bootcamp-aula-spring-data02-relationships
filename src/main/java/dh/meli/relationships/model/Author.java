@@ -43,7 +43,7 @@ public class Author {
     * ALL é para qualquer operação que for em cascata.
     *
     * 1:1 - 1 AUTOR PARA 1 ENDEREÇO */
-    @OneToOne(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("author") // IGNORA OS DADOS DO AUTOR (AO PREENCHER O ADDRESS NÃO TRAGA OS DADOS DO AUTHOR)
     private Address address; // CAMPO QUE REFERENCIA O OBJETO. NOME DO CAMPO: address
 

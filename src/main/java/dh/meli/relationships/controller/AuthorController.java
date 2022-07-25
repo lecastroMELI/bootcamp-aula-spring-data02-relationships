@@ -44,7 +44,10 @@ public class AuthorController {
         return ResponseEntity.ok(service.save(newAuthor));
     }
 
-    // TODO: objeter o método delete do prof
-
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable long id) {
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
