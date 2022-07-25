@@ -1,5 +1,6 @@
 package dh.meli.relationships.controller;
 
+import dh.meli.relationships.dto.AuthorDTO;
 import dh.meli.relationships.model.Author;
 import dh.meli.relationships.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,10 @@ public class AuthorController {
     @GetMapping("/{id}")
     public ResponseEntity<Author> getById(@PathVariable long id) {
         return ResponseEntity.ok(repository.findById(id).get());
+    }
+
+    @GetMapping("dto/{id}")
+    public ResponseEntity<AuthorDTO> getDtoById(@PathVariable long id) {
+        return ResponseEntity.ok(repository.getById(id));
     }
 }
