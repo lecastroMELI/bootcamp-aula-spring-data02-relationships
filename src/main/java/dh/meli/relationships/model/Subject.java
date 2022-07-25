@@ -20,7 +20,7 @@ public class Subject {
     // ------- LIVRO (BOOK) -------- //
     // O MESMO LIVRO PODE TER '1' ASSUNTO (e um assunto pode ter 'N' livros)
     // 1:N
-    @OneToMany(mappedBy = "subject") // TABELA PROPRIETÁRIA DO RELACIONAMENTO: subject
+    @OneToMany(mappedBy = "subject") // mappedBy INDICA A TABELA PROPRIETÁRIA DO RELACIONAMENTO: subject
     @JsonIgnoreProperties("subject") // AO PESQUISAR PELO LIVRO: 'dentro do livro não trazer o assunto'
     private List<Book> books;
 }
